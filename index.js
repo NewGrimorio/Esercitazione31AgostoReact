@@ -36,10 +36,15 @@
 const { listFilesInDirectory } = require('./src/showFileService');
 const readFileService = require('./src/readFileService');
 const selectFileService = require('./src/selectFileService');
+const copyFileService = require('./src/copyFileService');
+const hashFileService = require('./src/hashFileService');
+const readStreamService = require('./src/readStreamFileService');
+const osInfoService = require('./src/osInfoService');
 const readline = require('readline');
 const path = require('path');
 
 const FILES_DIR = path.join(__dirname, 'input', 'files');
+const OUTPUT_DIR = path.join(__dirname, 'output');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -92,24 +97,24 @@ async function main() {
           console.log('Nessun file selezionato. Seleziona un file prima di copiarlo.');
           break;
         }
-        console.log('TODO: copia in output');
+        await copyFileService.copyFileDemo(selectedFilePath, OUTPUT_DIR);
         break;
       case '5':
         if (!selectedFilePath) {
           console.log('Nessun file selezionato. Seleziona un file prima di calcolarne l\'hash.');
           break;
         }
-        console.log('TODO: hash');
+        await hashFileService.calculateFileHashDemo(selectedFilePath);
         break;
       case '6':
         if (!selectedFilePath) {
           console.log('Nessun file selezionato. Seleziona un file prima di leggerlo.');
           break;
         }
-        console.log('TODO: lettura con stream');
+        await readStreamService.readFileAsStreamDemo(selectedFilePath);
         break;
       case '7':
-        console.log('TODO: info sistema');
+        const osInfo = osInfoService.getSystemInfo();
         break;
       case '0':
         console.log('Arrivederci!');
