@@ -32,6 +32,49 @@
  *
  * L'applicazione dovrà funzionare esclusivamente da terminale, senza interfaccia grafica
  */
+/*
+Bonus: modalità HTTP
+
+Per gli studenti più avanzati, aggiungerei una parte finale.
+
+Creare un piccolo server:
+
+GET /files
+
+che restituisca la lista dei file.
+
+GET /file?name=testo.txt
+
+che restituisca le informazioni sul file.
+
+Esempio:
+
+http://localhost:3000/files
+
+Risposta:
+
+[
+    "testo.txt",
+    "dati.csv",
+    "documento.json"
+]
+
+E:
+
+http://localhost:3000/file?name=testo.txt
+{
+    "name": "testo.txt",
+    "size": 1842,
+    "extension": ".txt",
+    "lines": 45,
+    "words": 312
+}
+
+Qui entrerebbero in gioco anche:
+
+http
+url
+*/
 
 const { listFilesInDirectory } = require('./src/showFileService');
 const readFileService = require('./src/readFileService');
@@ -40,6 +83,7 @@ const copyFileService = require('./src/copyFileService');
 const hashFileService = require('./src/hashFileService');
 const readStreamService = require('./src/readStreamFileService');
 const osInfoService = require('./src/osInfoService');
+const httpServerService = require('./src/HttpServerService');
 const readline = require('readline');
 const path = require('path');
 
@@ -65,6 +109,7 @@ function showMenu() {
     console.log("5) Calcola l'hash del file selezionato");
     console.log("6) Leggi il file con il modulo stream");
     console.log("7) Visualizza informazioni sul sistema operativo");
+    console.log("8) Avvia un server HTTP per visualizzare i file e le informazioni sui file");
     console.log("0) Esci dal programma");
 }
 
@@ -115,6 +160,9 @@ async function main() {
         break;
       case '7':
         const osInfo = osInfoService.getSystemInfo();
+        break;
+      case '8':
+        await httpServerService.serverDemo(FILES_DIR, ask);
         break;
       case '0':
         console.log('Arrivederci!');
