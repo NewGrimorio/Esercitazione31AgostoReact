@@ -89,7 +89,6 @@ Caratteri speciali: 64
 const fs = require('fs');
 const path = require('path');
 
-// Legge il file come testo (encoding utf8).
 async function readFileContent(filePath) {
   try {
     return await fs.promises.readFile(filePath, 'utf8');
@@ -99,7 +98,6 @@ async function readFileContent(filePath) {
   }
 }
 
-// Legge il file come un buffer (senza specificare l'encoding).
 async function readFileAsBuffer(filePath) {
   try {
     return await fs.promises.readFile(filePath);

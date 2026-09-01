@@ -97,14 +97,14 @@ async function main() {
           console.log('Nessun file selezionato. Seleziona un file prima di copiarlo.');
           break;
         }
-        await copyFileService.copyFileDemo(selectedFilePath, OUTPUT_DIR);
+        await copyFileService.copyFileDemo(selectedFilePath, OUTPUT_DIR, ask);
         break;
       case '5':
         if (!selectedFilePath) {
           console.log('Nessun file selezionato. Seleziona un file prima di calcolarne l\'hash.');
           break;
         }
-        await hashFileService.calculateFileHashDemo(selectedFilePath);
+        await hashFileService.calculateFileHashDemo(selectedFilePath,ask);
         break;
       case '6':
         if (!selectedFilePath) {
